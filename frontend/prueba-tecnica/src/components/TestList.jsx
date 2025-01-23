@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Typography, List, ListItem, ListItemButton, ListItemText, Paper, Box } from "@mui/material"
+import { Typography, List, ListItem, ListItemButton, ListItemText, Paper, Box, CircularProgress } from "@mui/material"
 import { Link } from "react-router-dom"
 import { getTests } from "../services/api"
 
@@ -26,13 +26,13 @@ const TestList = () => {
       </Typography>
       <Paper elevation={0} sx={{ mt: 4 }}>
         <List>
-          {tests.map((test) => (
+          {(!tests || tests.length === 0 ? ( <CircularProgress />) : tests.map((test) => (
             <ListItem key={test._id} disablePadding>
               <ListItemButton component={Link} to={`/test/${test._id}`}>
                 <ListItemText primary={test.question} />
               </ListItemButton>
             </ListItem>
-          ))}
+          )))}
         </List>
       </Paper>
     </Box>
